@@ -10,6 +10,11 @@ export default function Rules() {
     // Naviguer vers la page de jeu, en préservant l'état du jeu
     router.push('/game');
   };
+  
+  const handleBackToHome = () => {
+    // Naviguer vers la page d'accueil
+    router.push('/');
+  };
 
   return (
     <div className="container">
@@ -47,9 +52,10 @@ export default function Rules() {
         <li>Award extra points if a player manages to include a personal (false or true) anecdote or a funny story to justify their choice.</li>
         <li>If the player invents the anecdote or story, and the players vote that it was false and it’s indeed false, +1 point for other players.</li>
         <li>If the player invents the anecdote or story, and the players vote that it was false and it’s true, -1 point for other players.</li>
-        <li>And another extra point if all players vote for the same card.</li>
+        <li>And another extra point if al l players vote for the same card.</li>
       </ul>
 
+      <button onClick={handleBackToHome} className="back-to-home">Back to Home</button>
       <button onClick={handleGoBack}>Back to Game</button>
     </div>
   );

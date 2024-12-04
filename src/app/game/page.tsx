@@ -1,11 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Notification from '../components/Notifications'; // Importer le composant Notification
 
 export default function Game() {
   const router = useRouter();
   const [playerNames, setPlayerNames] = useState<string[]>([]);
   const [playerScores, setPlayerScores] = useState<{ [key: string]: number }>({});
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   useEffect(() => {
     const savedNames = localStorage.getItem('playerNames');
@@ -38,6 +41,13 @@ export default function Game() {
     setPlayerScores((prevScores) => {
       const newScores = { ...prevScores, [player]: prevScores[player] + 1 };
       localStorage.setItem('playerScores', JSON.stringify(newScores));
+
+      // Vérifiez si un joueur atteint 20 points
+      if (newScores[player] === 20) {
+        setShowNotification(true);
+        setNotificationMessage(`${player} has won the game with 20 points!`);
+      }
+
       return newScores;
     });
   };
@@ -70,8 +80,19 @@ export default function Game() {
     router.push('/'); // Rediriger vers la page d'accueil
   };
 
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+  };
+
   return (
     <div className="container">
+      {showNotification && (
+        <Notification
+          message={notificationMessage}
+          onClose={handleCloseNotification}
+        />
+      )}
+
       <h2>Score Tracker</h2>
       <div id="players">
         {playerNames.map((player) => (
@@ -85,7 +106,7 @@ export default function Game() {
         ))}
       </div>
       <div className="buttons">
-        <button onClick={handleBackToHome}>Back to Home</button>
+        <button onClick={handleBackToHome} className="BackToHomeGame">Back to Home</button>
         <button onClick={resetScores}>Reset Scores</button>
       </div>
     </div>

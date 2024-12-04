@@ -225,3 +225,98 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield; /* Pour Firefox */
 }
+/* Bouton Back to Home */
+button.back-to-home {
+  background-color: #4caf50; /* Vert pour la page d'accueil */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.back-to-home:hover {
+  background-color: #388e3c; /* Vert plus foncé au survol */
+  transform: scale(1.05);
+}
+
+button.back-to-home:active {
+  transform: scale(0.95);
+}
+
+button.back-to-home:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffeb3b;
+}
+
+/* Bouton Back to Home Game */
+button.BackToHomeGame {
+  background-color: #4caf50; /* Vert pour la page d'accueil */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.BackToHomeGame:hover {
+  background-color: #388e3c; /* Vert plus foncé au survol */
+  transform: scale(1.05);
+}
+
+button.BackToHomeGame:active {
+  transform: scale(0.95);
+}
+
+button.BackToHomeGame:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffeb3b;
+}
+/* styles/globals.css */
+.notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.notification-content {
+  background-color: #ffD700;
+  color: #fff;
+  padding: 30px 50px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.notification-content h3 {
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  background-color: #e67e22;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+  background-color: #ff3e30;
+}
