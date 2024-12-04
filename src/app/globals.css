@@ -119,3 +119,109 @@ nav {
     font-size: 1em;
   }
 }
+/* Style du bouton 'Ajouter un joueur' avec icône */
+button.add-player {
+  background-color: #4CAF50; /* Vert plus élégant */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Espacement entre le texte et l'icône */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre douce */
+}
+
+button.add-player:hover {
+  background-color: #45a049; /* Couleur de survol plus sombre */
+  transform: scale(1.05);
+}
+
+button.add-player:active {
+  transform: scale(0.95);
+}
+
+button.add-player:focus {
+  outline: none; /* Retirer le contour par défaut */
+  box-shadow: 0 0 0 2px #ffeb3b; /* Ombre dorée au focus */
+}
+
+/* Icône personnalisée */
+button.add-player svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+/* Style spécifique pour l'input de nombre de joueurs */
+input[type="number"] {
+  padding: 10px;
+  font-size: 1.1em;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 2px solid #ffD700;
+  background-color: #fff;
+  color: #333;
+  width: 60px;
+  text-align: center;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+/* Ajout du bouton de suppression de joueur */
+button.remove-player {
+  background-color: #e74c3c; /* Rouge pour la suppression */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre douce */
+}
+
+button.remove-player:hover {
+  background-color: #c0392b; /* Couleur de survol plus sombre */
+  transform: scale(1.05);
+}
+
+button.remove-player:active {
+  transform: scale(0.95);
+}
+
+button.remove-player:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffeb3b;
+}
+
+/* Icône personnalisée pour le bouton de suppression */
+button.remove-player svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+/* Masquer les flèches du champ de nombre de joueurs */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Pour Firefox */
+}
