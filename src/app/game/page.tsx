@@ -1,5 +1,4 @@
-// app/game/page.tsx
-'use client'; 
+'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -9,33 +8,66 @@ export default function Game() {
   const [playerScores, setPlayerScores] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const numPlayers = parseInt(urlParams.get('players') || '3');
-    const initialNames: string[] = [];
-    const initialScores: { [key: string]: number } = {};
+    const savedNames = localStorage.getItem('playerNames');
+    const savedScores = localStorage.getItem('playerScores');
 
-    for (let i = 1; i <= numPlayers; i++) {
-      const playerName = prompt(`Enter the name of Player ${i}:`, `Player ${i}`);
-      initialNames.push(playerName || `Player ${i}`);
-      initialScores[playerName || `Player ${i}`] = 0;
+    if (savedNames && savedScores) {
+      setPlayerNames(JSON.parse(savedNames));
+      setPlayerScores(JSON.parse(savedScores));
+    } else {
+      const urlParams = new URLSearchParams(window.location.search);
+      const numPlayers = parseInt(urlParams.get('players') || '3');
+      const initialNames: string[] = [];
+      const initialScores: { [key: string]: number } = {};
+
+      for (let i = 1; i <= numPlayers; i++) {
+        const playerName = prompt(`Enter the name of Player ${i}:`, `Player ${i}`);
+        initialNames.push(playerName || `Player ${i}`);
+        initialScores[playerName || `Player ${i}`] = 0;
+      }
+
+      setPlayerNames(initialNames);
+      setPlayerScores(initialScores);
+
+      localStorage.setItem('playerNames', JSON.stringify(initialNames));
+      localStorage.setItem('playerScores', JSON.stringify(initialScores));
     }
-
-    setPlayerNames(initialNames);
-    setPlayerScores(initialScores);
   }, []);
 
   const addPoint = (player: string) => {
-    setPlayerScores((prevScores) => ({
-      ...prevScores,
-      [player]: prevScores[player] + 1,
-    }));
+    setPlayerScores((prevScores) => {
+      const newScores = { ...prevScores, [player]: prevScores[player] + 1 };
+      localStorage.setItem('playerScores', JSON.stringify(newScores));
+      return newScores;
+    });
   };
 
   const removePoint = (player: string) => {
-    setPlayerScores((prevScores) => ({
-      ...prevScores,
-      [player]: prevScores[player] > 0 ? prevScores[player] - 1 : 0,
-    }));
+    setPlayerScores((prevScores) => {
+      const newScores = {
+        ...prevScores,
+        [player]: prevScores[player] > 0 ? prevScores[player] - 1 : 0,
+      };
+      localStorage.setItem('playerScores', JSON.stringify(newScores));
+      return newScores;
+    });
+  };
+
+  const resetScores = () => {
+    const newScores = playerNames.reduce((scores, player) => {
+      scores[player] = 0;
+      return scores;
+    }, {} as { [key: string]: number });
+
+    setPlayerScores(newScores);
+    localStorage.setItem('playerScores', JSON.stringify(newScores));
+  };
+
+  const handleBackToHome = () => {
+    resetScores(); // Réinitialiser les scores
+    localStorage.removeItem('playerNames'); // Supprimer les noms de joueurs pour un redémarrage propre
+    localStorage.removeItem('playerScores'); // Supprimer les scores pour un redémarrage propre
+    router.push('/'); // Rediriger vers la page d'accueil
   };
 
   return (
@@ -52,7 +84,10 @@ export default function Game() {
           </div>
         ))}
       </div>
-      <button onClick={() => router.push('/')}>Back to Home</button>
+      <div className="buttons">
+        <button onClick={handleBackToHome}>Back to Home</button>
+        <button onClick={resetScores}>Reset Scores</button>
+      </div>
     </div>
   );
 }
