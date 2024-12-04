@@ -1,4 +1,3 @@
-// app/rules/page.tsx
 'use client';
 
 import React from 'react';
@@ -21,7 +20,7 @@ export default function Rules() {
         <li>Materials:
           <ul>
             <li>Situation Cards: Cards with workplace scenarios.</li>
-            <li>Soft Skill Cards: Cards with soft skills like "Empathy," "Creativity," "Teamwork," etc.</li>
+            <li>Soft Skill Cards: Cards with soft skills like &quot;Empathy,&quot; &quot;Creativity,&quot; &quot;Teamwork,&quot; etc.</li>
           </ul>
         </li>
         <li>Each player gets 5 Soft Skill Cards to start.</li>
